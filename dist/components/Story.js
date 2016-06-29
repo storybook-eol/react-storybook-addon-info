@@ -117,7 +117,7 @@ var stylesheet = (_stylesheet = {
   }
 }, (0, _defineProperty3.default)(_stylesheet, 'infoBody', (0, _extends3.default)({}, _theme.baseFonts, {
   fontWeight: 300,
-  maxWidth: '48rem',
+  /*maxWidth: '48rem',*/
   lineHeight: 1.45,
   fontSize: 15
 })), (0, _defineProperty3.default)(_stylesheet, 'infoContent', {
