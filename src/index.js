@@ -29,7 +29,7 @@ export default {
       }
 
       const props = {
-        _info,
+        info: _info,
         context,
         showInline: Boolean(options.inline),
         showHeader: Boolean(options.header),
