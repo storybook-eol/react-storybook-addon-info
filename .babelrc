@@ -1,4 +1,3 @@
 {
-  "presets": ["es2015", "stage-2", "react"],
-  "plugins": ["react-docgen"]
+  "presets": ["es2015", "stage-2", "react"]
 }
