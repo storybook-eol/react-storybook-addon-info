@@ -67,7 +67,7 @@ function propsFromDocgen(type) {
         propType: renderDocgenPropType(propType),
         required: docgenInfoProp.required,
         description: docgenInfoProp.description,
-        defaultValue: defaultValueDesc.value
+        defaultValue: defaultValueDesc.value,
       };
     }
   }
