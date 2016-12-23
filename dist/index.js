@@ -33,7 +33,8 @@ var defaultOptions = {
   inline: false,
   header: true,
   source: true,
-  propTables: []
+  propTables: [],
+  isWrapped: false
 };
 
 var defaultMtrcConf = {
@@ -85,6 +86,7 @@ exports.default = {
         showHeader: Boolean(options.header),
         showSource: Boolean(options.source),
         propTables: options.propTables,
+        isWrapped: Boolean(options.isWrapped),
         mtrcConf: mtrcConf
       };
 

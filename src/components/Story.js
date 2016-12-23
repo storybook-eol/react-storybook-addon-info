@@ -200,7 +200,7 @@ export default class Story extends React.Component {
         <h1 style={stylesheet.source.h1}>Story Source</h1>
         <Pre>
         {React.Children.map(this.props.children, (root, idx) => (
-          <Node key={idx} depth={0} node={root} />
+          <Node key={idx} depth={0} node={root} isWrapped={this.props.isWrapped} />
         ))}
         </Pre>
       </div>
@@ -292,6 +292,7 @@ Story.propTypes = {
   showInline: React.PropTypes.bool,
   showHeader: React.PropTypes.bool,
   showSource: React.PropTypes.bool,
+  isWrapped: React.PropTypes.bool,
   children: React.PropTypes.oneOfType([
     React.PropTypes.object,
     React.PropTypes.array,
@@ -303,5 +304,6 @@ Story.defaultProps = {
   showInline: false,
   showHeader: true,
   showSource: true,
+  isWrapped: false,
   mtrcConf: {}
 };

@@ -301,6 +301,8 @@ var Story = function (_React$Component) {
   }, {
     key: '_getSourceCode',
     value: function _getSourceCode() {
+      var _this3 = this;
+
       if (!this.props.showSource) {
         return null;
       }
@@ -317,7 +319,7 @@ var Story = function (_React$Component) {
           _markdown.Pre,
           null,
           _react2.default.Children.map(this.props.children, function (root, idx) {
-            return _react2.default.createElement(_Node2.default, { key: idx, depth: 0, node: root });
+            return _react2.default.createElement(_Node2.default, { key: idx, depth: 0, node: root, isWrapped: _this3.props.isWrapped });
           })
         )
       );

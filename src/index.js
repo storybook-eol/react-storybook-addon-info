@@ -8,6 +8,7 @@ const defaultOptions = {
   header: true,
   source: true,
   propTables: [],
+  isWrapped: false,
 };
 
 const defaultMtrcConf = {
@@ -62,6 +63,7 @@ export default {
         showHeader: Boolean(options.header),
         showSource: Boolean(options.source),
         propTables: options.propTables,
+        isWrapped: Boolean(options.isWrapped),
         mtrcConf
       };
 
