@@ -1,8 +1,7 @@
 import React from 'react';
 import { baseFonts } from '../theme';
 
-export class H1 extends React.Component {
-  render() {
+export const H1 = ({id, children}) => {
     const styles = {
       ...baseFonts,
       borderBottom: '1px solid #eee',
@@ -12,12 +11,10 @@ export class H1 extends React.Component {
       fontSize: '40px',
     };
 
-    return <h1 id={this.props.id} style={styles}>{this.props.children}</h1>;
-  }
+    return <h1 id={id} style={styles}>{children}</h1>;
 }
 
-export class H2 extends React.Component {
-  render() {
+export const H2 = ({id, children}) => {
     const styles = {
       ...baseFonts,
       fontWeight: 600,
@@ -26,12 +23,10 @@ export class H2 extends React.Component {
       fontSize: '30px',
     };
 
-    return <h2 id={this.props.id} style={styles}>{this.props.children}</h2>;
-  }
+    return <h2 id={id} style={styles}>{children}</h2>;
 }
 
-export class H3 extends React.Component {
-  render() {
+export const H3 = ({id, children}) => {
     const styles = {
       ...baseFonts,
       fontWeight: 600,
@@ -41,12 +36,10 @@ export class H3 extends React.Component {
       textTransform: 'uppercase',
     };
 
-    return <h3 id={this.props.id} style={styles}>{this.props.children}</h3>;
-  }
+    return <h3 id={id} style={styles}>{children}</h3>;
 }
 
-export class H4 extends React.Component {
-  render() {
+export const H4 = ({id, children}) => {
     const styles = {
       ...baseFonts,
       fontWeight: 600,
@@ -56,11 +49,9 @@ export class H4 extends React.Component {
     };
 
     return <h4 id={this.props.id} style={styles}>{this.props.children}</h4>;
-  }
 }
 
-export class H5 extends React.Component {
-  render() {
+export const H5 = ({id, children}) => {
     const styles = {
       ...baseFonts,
       fontWeight: 600,
@@ -69,12 +60,10 @@ export class H5 extends React.Component {
       fontSize: '18px',
     };
 
-    return <h5 id={this.props.id} style={styles}>{this.props.children}</h5>;
-  }
+    return <h5 id={id} style={styles}>{children}</h5>;
 }
 
-export class H6 extends React.Component {
-  render() {
+export const H6 = ({id, children}) => {
     const styles = {
       ...baseFonts,
       fontWeight: 400,
@@ -84,5 +73,4 @@ export class H6 extends React.Component {
     };
 
     return <h6 id={this.props.id} style={styles}>{this.props.children}</h6>;
-  }
 }
