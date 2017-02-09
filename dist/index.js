@@ -5,13 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Story = undefined;
 
-var _assign = require('babel-runtime/core-js/object/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.setDefaults = setDefaults;
 
@@ -63,7 +57,7 @@ exports.default = {
       }
     }
 
-    var options = (0, _extends3.default)({}, defaultOptions, _options);
+    var options = _extends({}, defaultOptions, _options);
 
     // props.propTables can only be either an array of components or null
     // propTables option is allowed to be set to 'false' (a boolean)
@@ -72,9 +66,9 @@ exports.default = {
       options.propTables = null;
     }
 
-    var mtrcConf = (0, _extends3.default)({}, defaultMtrcConf);
+    var mtrcConf = _extends({}, defaultMtrcConf);
     if (options && options.mtrcConf) {
-      (0, _assign2.default)(mtrcConf, options.mtrcConf);
+      Object.assign(mtrcConf, options.mtrcConf);
     }
 
     return this.add(storyName, function (context) {
@@ -85,6 +79,7 @@ exports.default = {
         showHeader: Boolean(options.header),
         showSource: Boolean(options.source),
         propTables: options.propTables,
+        stylesheet: options.stylesheet,
         mtrcConf: mtrcConf
       };
 
@@ -97,5 +92,5 @@ exports.default = {
   }
 };
 function setDefaults(newDefaults) {
-  return (0, _assign2.default)(defaultOptions, newDefaults);
+  return Object.assign(defaultOptions, newDefaults);
 };

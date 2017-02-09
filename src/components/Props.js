@@ -1,24 +1,22 @@
 import React from 'react';
 import PropVal from './PropVal';
 
-const stylesheet = {
-  propStyle: {
-  },
-  propNameStyle: {
-  },
-  propValueStyle: {
-  }
-}
 
 export default class Props extends React.Component {
+
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const props = this.props.node.props;
+    const {storyStylesheet} = this.context;
     const defaultProps = this.props.node.type.defaultProps;
     if (!props || typeof props !== 'object') {
       return <span />;
     }
 
-    const {propStyle, propValueStyle, propNameStyle} = stylesheet;
+    const {propStyle, propValueStyle, propNameStyle} = storyStylesheet.Props;
 
     const names = Object.keys(props).filter(name => {
       return name[0] !== '_' && name !== 'children' && (!defaultProps || props[name] != defaultProps[name]);

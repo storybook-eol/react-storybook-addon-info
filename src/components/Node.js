@@ -1,22 +1,20 @@
 import React from 'react';
+import _merge from 'lodash/merge';
 import Props from './Props'
-
-
-const stylesheet = {
-  containerStyle: {},
-  tagStyle: {
-    color: '#777',
-  }
-}
 
 export default class Node extends React.Component {
   constructor(props){
     super(props);
   }
 
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render(){
     const {node, depth} = this.props;
-    let {tagStyle, containerStyle} = stylesheet;
+    const {storyStylesheet} = this.context;
+    let {tagStyle, containerStyle} = _merge({}, storyStylesheet.Node);
 
     var leftPad = {
       paddingLeft: 3 + (depth + 1) * 15,

@@ -15,7 +15,8 @@
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
     "storybook": "start-storybook -p 9010",
-    "publish-storybook": "bash .scripts/publish_storybook.sh"
+    "publish-storybook": "bash .scripts/publish_storybook.sh",
+    "build": "babel src --out-dir dist"
   },
   "devDependencies": {
     "@kadira/storybook": "^2.20.1",

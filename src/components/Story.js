@@ -1,87 +1,36 @@
 import React from 'react';
+import _merge from 'lodash/merge';
 import MTRC from 'markdown-to-react-components';
 import PropTable from './PropTable';
 import Node from './Node';
-import { baseFonts } from './theme';
+import { baseStylesheet } from './theme';
 import { Pre } from './markdown';
 
-const stylesheet = {
-  link: {
-    base: {
-      fontFamily: 'sans-serif',
-      fontSize: '12px',
-      display: 'block',
-      position: 'fixed',
-      textDecoration: 'none',
-      background: '#28c',
-      color: '#fff',
-      padding: '5px 15px',
-      cursor: 'pointer',
-    },
-    topRight: {
-      top: 0,
-      right: 0,
-      borderRadius: '0 0 0 5px',
-    },
-  },
-  info: {
-    position: 'absolute',
-    background: 'white',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: '0 40px',
-    overflow: 'auto',
-  },
-  children: {
-    position: 'relative',
-    zIndex: 0,
-  },
-  infoBody: {
-    ...baseFonts,
-    fontWeight: 300,
-    lineHeight: 1.45,
-    fontSize: '15px',
-  },
-  infoContent: {
-    marginBottom: 0,
-  },
-  header: {
-    h1: {
-      margin: '20px 0 0 0',
-      padding: 0,
-      fontSize: '35px',
-    },
-    h2: {
-      margin: '0 0 10px 0',
-      padding: 0,
-      fontWeight: 400,
-      fontSize: '22px',
-    },
-    body: {
-      borderBottom: '1px solid #eee',
-      marginBottom: 10,
-    },
-  },
-  source: {
-    h1: {
-      margin: '20px 0 0 0',
-      padding: '0 0 5px 0',
-      fontSize: '25px',
-      borderBottom: '1px solid #EEE',
-    },
-  },
-  propTableHead: {
-    margin: '20px 0 0 0',
-  },
-};
 
 export default class Story extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.state = { open: false };
+  constructor(props, ...args) {
+    super(props, ...args);
+    this.state = {
+      open: false,
+      stylesheet: _merge({}, baseStylesheet, props.stylesheet)
+    };
     MTRC.configure(this.props.mtrcConf);
+  }
+
+  // pass down the stylesheet on context
+  static childContextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
+  getChildContext() {
+    return {
+      storyStylesheet: this.state.stylesheet
+    };
+  }
+
+  getInfoBodyStyles() {
+    const {stylesheet} = this.state;
+    return _merge({}, stylesheet.baseFont, stylesheet.infoBody);
   }
 
   _renderStory() {
@@ -93,10 +42,11 @@ export default class Story extends React.Component {
   }
 
   _renderInline() {
+    const {stylesheet} = this.state;
     return (
       <div>
         <div style={stylesheet.infoPage}>
-          <div style={stylesheet.infoBody} >
+          <div style={this.getInfoBodyStyles()} >
             { this._getInfoHeader() }
           </div>
         </div>
@@ -104,7 +54,7 @@ export default class Story extends React.Component {
             { this._renderStory() }
         </div>
         <div style={stylesheet.infoPage}>
-          <div style={stylesheet.infoBody} >
+          <div style={this.getInfoBodyStyles()} >
             { this._getInfoContent() }
             { this._getSourceCode() }
             { this._getPropTables() }
@@ -115,6 +65,7 @@ export default class Story extends React.Component {
   }
 
   _renderOverlay() {
+    const {stylesheet} = this.state;
     const linkStyle = {
       ...stylesheet.link.base,
       ...stylesheet.link.topRight,
@@ -144,7 +95,7 @@ export default class Story extends React.Component {
         <div style={infoStyle}>
           <a style={linkStyle} onClick={closeOverlay}>×</a>
           <div style={stylesheet.infoPage}>
-            <div style={stylesheet.infoBody}>
+            <div style={this.getInfoBodyStyles()}>
               { this._getInfoHeader() }
               { this._getInfoContent() }
               { this._getSourceCode() }
@@ -157,6 +108,7 @@ export default class Story extends React.Component {
   }
 
   _getInfoHeader() {
+    const {stylesheet} = this.state;
     if (!this.props.context || !this.props.showHeader) {
       return null;
     }
@@ -170,6 +122,7 @@ export default class Story extends React.Component {
   }
 
   _getInfoContent() {
+    const {stylesheet} = this.state;
     if (!this.props.info) {
       return '';
     }
@@ -191,6 +144,7 @@ export default class Story extends React.Component {
   }
 
   _getSourceCode() {
+    const {stylesheet} = this.state;
     if (!this.props.showSource) {
       return null;
     }
@@ -252,6 +206,7 @@ export default class Story extends React.Component {
       return (a.displayName || a.name) > (b.displayName || b.name);
     });
 
+    const {stylesheet} = this.state;
     const propTables = array.map(function (type, idx) {
       return (
         <div key={idx}>
@@ -271,8 +226,6 @@ export default class Story extends React.Component {
         {propTables}
       </div>
     );
-
-    return;
   }
 
   render() {
@@ -296,6 +249,7 @@ Story.propTypes = {
     React.PropTypes.object,
     React.PropTypes.array,
   ]),
+  stylesheet: React.PropTypes.object,
   mtrcConf: React.PropTypes.object
 };
 

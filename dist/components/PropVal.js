@@ -4,33 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-var _keys = require('babel-runtime/core-js/object/keys');
-
-var _keys2 = _interopRequireDefault(_keys);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _react = require('react');
 
@@ -42,42 +18,13 @@ var _reactAddonsCreateFragment2 = _interopRequireDefault(_reactAddonsCreateFragm
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var valueStyles = {
-  func: {
-    color: '#170'
-  },
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  attr: {
-    color: '#666'
-  },
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  object: {
-    color: '#666'
-  },
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-  array: {
-    color: '#666'
-  },
-
-  number: {
-    color: '#a11'
-  },
-
-  string: {
-    color: '#22a',
-    wordBreak: 'break-word'
-  },
-
-  bool: {
-    color: '#a11'
-  },
-
-  empty: {
-    color: '#777'
-  }
-};
-
-function previewArray(val) {
+function previewArray(val, stylesheet) {
   var items = {};
   val.slice(0, 3).forEach(function (item, i) {
     items['n' + i] = _react2.default.createElement(PropVal, { val: item });
@@ -90,20 +37,20 @@ function previewArray(val) {
   }
   return _react2.default.createElement(
     'span',
-    { style: valueStyles.array },
+    { style: stylesheet.array },
     '[',
     (0, _reactAddonsCreateFragment2.default)(items),
     ']'
   );
 }
 
-function previewObject(val) {
-  var names = (0, _keys2.default)(val);
+function previewObject(val, stylesheet) {
+  var names = Object.keys(val);
   var items = {};
   names.slice(0, 3).forEach(function (name, i) {
     items['k' + i] = _react2.default.createElement(
       'span',
-      { style: valueStyles.attr },
+      { style: stylesheet.attr },
       name
     );
     items['c' + i] = ': ';
@@ -117,20 +64,20 @@ function previewObject(val) {
   }
   return _react2.default.createElement(
     'span',
-    { style: valueStyles.object },
+    { style: stylesheet.object },
     '{',
     (0, _reactAddonsCreateFragment2.default)(items),
     '}'
   );
 }
 
-function previewProp(val) {
+function previewProp(val, stylesheet) {
   var braceWrap = true;
   var content = null;
   if (typeof val === 'number') {
     content = _react2.default.createElement(
       'span',
-      { style: valueStyles.number },
+      { style: stylesheet.number },
       val
     );
   } else if (typeof val === 'string') {
@@ -139,7 +86,7 @@ function previewProp(val) {
     }
     content = _react2.default.createElement(
       'span',
-      { style: valueStyles.string },
+      { style: stylesheet.string },
       '"',
       val,
       '"'
@@ -148,24 +95,24 @@ function previewProp(val) {
   } else if (typeof val === 'boolean') {
     content = _react2.default.createElement(
       'span',
-      { style: valueStyles.bool },
+      { style: stylesheet.bool },
       '' + val
     );
   } else if (Array.isArray(val)) {
-    content = previewArray(val);
+    content = previewArray(val, stylesheet);
   } else if (typeof val === 'function') {
     content = _react2.default.createElement(
       'span',
-      { style: valueStyles.func },
+      { style: stylesheet.func },
       val.name ? val.name + '()' : 'anonymous()'
     );
   } else if (!val) {
     content = _react2.default.createElement(
       'span',
-      { style: valueStyles.empty },
+      { style: stylesheet.empty },
       '' + val
     );
-  } else if ((typeof val === 'undefined' ? 'undefined' : (0, _typeof3.default)(val)) !== 'object') {
+  } else if ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) !== 'object') {
     content = _react2.default.createElement(
       'span',
       null,
@@ -174,11 +121,11 @@ function previewProp(val) {
   } else if (_react2.default.isValidElement(val)) {
     content = _react2.default.createElement(
       'span',
-      { style: valueStyles.object },
+      { style: stylesheet.object },
       '<' + (val.type.displayName || val.type.name || val.type) + ' />'
     );
   } else {
-    content = previewObject(val);
+    content = previewObject(val, stylesheet);
   }
 
   if (!braceWrap) return content;
@@ -192,22 +139,27 @@ function previewProp(val) {
 }
 
 var PropVal = function (_React$Component) {
-  (0, _inherits3.default)(PropVal, _React$Component);
+  _inherits(PropVal, _React$Component);
 
   function PropVal() {
-    (0, _classCallCheck3.default)(this, PropVal);
-    return (0, _possibleConstructorReturn3.default)(this, (PropVal.__proto__ || (0, _getPrototypeOf2.default)(PropVal)).apply(this, arguments));
+    _classCallCheck(this, PropVal);
+
+    return _possibleConstructorReturn(this, (PropVal.__proto__ || Object.getPrototypeOf(PropVal)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(PropVal, [{
+  _createClass(PropVal, [{
     key: 'render',
     value: function render() {
-      return previewProp(this.props.val);
+      return previewProp(this.props.val, this.context.storyStylesheet.PropVal);
     }
   }]);
+
   return PropVal;
 }(_react2.default.Component);
 
+PropVal.contextTypes = {
+  storyStylesheet: _react2.default.PropTypes.object
+};
 exports.default = PropVal;
 
 
