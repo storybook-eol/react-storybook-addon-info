@@ -63,15 +63,13 @@ export const baseStylesheet = {
     h1: {
       margin: '20px 0 0 0',
       padding: 0,
-      fontSize: '35px',
-      color: 'blue'
+      fontSize: '35px'
     },
     h2: {
       margin: '0 0 10px 0',
       padding: 0,
       fontWeight: 400,
-      fontSize: '22px',
-      color: 'green'
+      fontSize: '22px'
     },
     body: {
       borderBottom: '1px solid #eee',
