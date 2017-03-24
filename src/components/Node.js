@@ -15,7 +15,7 @@ export default class Node extends React.Component {
   }
 
   render(){
-    const {node, depth} = this.props;
+    const {node, depth, isWrapped} = this.props;
     let {tagStyle, containerStyle} = stylesheet;
 
     var leftPad = {
@@ -25,7 +25,7 @@ export default class Node extends React.Component {
 
     Object.assign(containerStyle, leftPad);
 
-    const {name, text, children} = getData(node);
+    const {name, text, children} = getData(node, isWrapped);
 
     // Just text
     if (!name) {
@@ -65,7 +65,7 @@ export default class Node extends React.Component {
   }
 }
 
-function getData(element) {
+function getData(element, isWrapped) {
   const data = {
     name: null,
     text: null,
@@ -83,7 +83,8 @@ function getData(element) {
   }
 
   data.children = element.props.children;
-  const type = element.type;
+
+  const type = isWrapped ? element.type.wrapped : element.type;
 
   if (typeof type === 'string') {
     data.name = type;
