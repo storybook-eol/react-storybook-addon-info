@@ -62,6 +62,7 @@ export default {
         showHeader: Boolean(options.header),
         showSource: Boolean(options.source),
         propTables: options.propTables,
+        propTablesExclude: options.propTablesExclude,
         mtrcConf
       };
 

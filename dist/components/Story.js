@@ -325,6 +325,8 @@ var Story = function (_React$Component) {
   }, {
     key: '_getPropTables',
     value: function _getPropTables() {
+      var _this3 = this;
+
       var types = new _map2.default();
 
       if (this.props.propTables === null) {
@@ -342,7 +344,7 @@ var Story = function (_React$Component) {
       }
 
       // depth-first traverse and collect types
-      function extract(children) {
+      var extract = function extract(children) {
         if (!children) {
           return;
         }
@@ -353,13 +355,14 @@ var Story = function (_React$Component) {
         if (children.props && children.props.children) {
           extract(children.props.children);
         }
-        if (typeof children === 'string' || typeof children.type === 'string') {
+        if (typeof children === 'string' || typeof children.type === 'string' || Array.isArray(_this3.props.propTablesExclude) && // also ignore excluded types
+          ~_this3.props.propTablesExclude.indexOf(children.type)) {
           return;
         }
         if (children.type && !types.has(children.type)) {
           types.set(children.type, true);
         }
-      }
+      };
 
       // extract components from children
       extract(this.props.children);
@@ -422,6 +425,7 @@ Story.propTypes = {
   context: _react2.default.PropTypes.object,
   info: _react2.default.PropTypes.string,
   propTables: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.func),
+  propTablesExclude: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.func),
   showInline: _react2.default.PropTypes.bool,
   showHeader: _react2.default.PropTypes.bool,
   showSource: _react2.default.PropTypes.bool,
