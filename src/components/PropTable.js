@@ -1,6 +1,7 @@
 import React from 'react';
 import PropVal from './PropVal';
 
+let ReactPropTypeArgs;
 const PropTypesMap = new Map();
 for (const typeName in React.PropTypes) {
   if (!React.PropTypes.hasOwnProperty(typeName)) {
@@ -10,6 +11,14 @@ for (const typeName in React.PropTypes) {
   PropTypesMap.set(type, typeName);
   PropTypesMap.set(type.isRequired, typeName);
 }
+
+const SpecialPropTypes = [
+  { regex: /, expected an array/m,              name: match => 'arrayOf'},
+  { regex: /, expected `object`/m,              name: match => 'shape'},
+  { regex: /, expected one of (\[.+])/m,        name: match => 'oneOf(' + match[1] + ')'},
+  { regex: /, expected instance of `([^`]+)`/m, name: match => 'instanceOf(' + match[1] + ')'},
+  { regex: /, expected an object/m,             name: match => 'objectOf'},
+];
 
 const stylesheet = {
   propTable: {
@@ -35,8 +44,18 @@ export default class PropTable extends React.Component {
           continue;
         }
         const typeInfo = type.propTypes[property];
-        const propType = PropTypesMap.get(typeInfo) || 'other';
-        const required = typeInfo.isRequired === undefined ? 'yes' : 'no';
+        let propType = PropTypesMap.get(typeInfo);
+        if (!propType) {
+          const outcome = typeInfo(...ReactPropTypeArgs);
+          let match;
+          SpecialPropTypes.find(spt => {
+            if (match = outcome.message.match(spt.regex)) {
+              propType = spt.name(match);
+              return true;
+            }
+          });
+        }
+        const required = typeInfo.isRequired === undefined;
         props[property] = { property, propType, required };
       }
     }
@@ -79,8 +98,8 @@ export default class PropTable extends React.Component {
           {array.map(row => (
             <tr key={row.property}>
               <td>{row.property}</td>
-              <td>{row.propType}</td>
-              <td>{row.required}</td>
+              <td>{row.propType || 'other'}</td>
+              <td>{row.required ? 'yes' : 'no'}</td>
               <td>{row.defaultValue === undefined ? '-' : <PropVal val={row.defaultValue} />}</td>
             </tr>
           ))}
@@ -92,5 +111,10 @@ export default class PropTable extends React.Component {
 
 PropTable.displayName = 'PropTable';
 PropTable.propTypes = {
-  type: React.PropTypes.func,
+  type: (...args) =>
+  {
+    //This is a trick to get valid arguments to pass to React's PropTypes functions
+    ReactPropTypeArgs = args;
+    return React.PropTypes.func(...args)
+  }
 };
