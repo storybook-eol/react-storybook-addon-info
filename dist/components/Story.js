@@ -4,45 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _from = require('babel-runtime/core-js/array/from');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _from2 = _interopRequireDefault(_from);
-
-var _map = require('babel-runtime/core-js/map');
-
-var _map2 = _interopRequireDefault(_map);
-
-var _assign = require('babel-runtime/core-js/object/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _merge2 = require('lodash/merge');
+
+var _merge3 = _interopRequireDefault(_merge2);
 
 var _markdownToReactComponents = require('markdown-to-react-components');
 
@@ -62,97 +34,52 @@ var _markdown = require('./markdown');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var stylesheet = {
-  link: {
-    base: {
-      fontFamily: 'sans-serif',
-      fontSize: '12px',
-      display: 'block',
-      position: 'fixed',
-      textDecoration: 'none',
-      background: '#28c',
-      color: '#fff',
-      padding: '5px 15px',
-      cursor: 'pointer'
-    },
-    topRight: {
-      top: 0,
-      right: 0,
-      borderRadius: '0 0 0 5px'
-    }
-  },
-  info: {
-    position: 'absolute',
-    background: 'white',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: '0 40px',
-    overflow: 'auto'
-  },
-  children: {
-    position: 'relative',
-    zIndex: 0
-  },
-  infoBody: (0, _extends3.default)({}, _theme.baseFonts, {
-    fontWeight: 300,
-    lineHeight: 1.45,
-    fontSize: '15px'
-  }),
-  infoContent: {
-    marginBottom: 0
-  },
-  header: {
-    h1: {
-      margin: '20px 0 0 0',
-      padding: 0,
-      fontSize: '35px'
-    },
-    h2: {
-      margin: '0 0 10px 0',
-      padding: 0,
-      fontWeight: 400,
-      fontSize: '22px'
-    },
-    body: {
-      borderBottom: '1px solid #eee',
-      marginBottom: 10
-    }
-  },
-  source: {
-    h1: {
-      margin: '20px 0 0 0',
-      padding: '0 0 5px 0',
-      fontSize: '25px',
-      borderBottom: '1px solid #EEE'
-    }
-  },
-  propTableHead: {
-    margin: '20px 0 0 0'
-  }
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Story = function (_React$Component) {
-  (0, _inherits3.default)(Story, _React$Component);
+  _inherits(Story, _React$Component);
 
-  function Story() {
+  function Story(props) {
     var _ref;
 
-    (0, _classCallCheck3.default)(this, Story);
+    _classCallCheck(this, Story);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
     }
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (_ref = Story.__proto__ || (0, _getPrototypeOf2.default)(Story)).call.apply(_ref, [this].concat(args)));
+    var _this = _possibleConstructorReturn(this, (_ref = Story.__proto__ || Object.getPrototypeOf(Story)).call.apply(_ref, [this, props].concat(args)));
 
-    _this.state = { open: false };
+    _this.state = {
+      open: false,
+      stylesheet: (0, _merge3.default)({}, _theme.baseStylesheet, props.stylesheet)
+    };
     _markdownToReactComponents2.default.configure(_this.props.mtrcConf);
     return _this;
   }
 
-  (0, _createClass3.default)(Story, [{
+  // pass down the stylesheet on context
+
+
+  _createClass(Story, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        storyStylesheet: this.state.stylesheet
+      };
+    }
+  }, {
+    key: 'getInfoBodyStyles',
+    value: function getInfoBodyStyles() {
+      var stylesheet = this.state.stylesheet;
+
+      return (0, _merge3.default)({}, stylesheet.baseFont, stylesheet.infoBody);
+    }
+  }, {
     key: '_renderStory',
     value: function _renderStory() {
       return _react2.default.createElement(
@@ -164,6 +91,8 @@ var Story = function (_React$Component) {
   }, {
     key: '_renderInline',
     value: function _renderInline() {
+      var stylesheet = this.state.stylesheet;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -172,7 +101,7 @@ var Story = function (_React$Component) {
           { style: stylesheet.infoPage },
           _react2.default.createElement(
             'div',
-            { style: stylesheet.infoBody },
+            { style: this.getInfoBodyStyles() },
             this._getInfoHeader()
           )
         ),
@@ -186,7 +115,7 @@ var Story = function (_React$Component) {
           { style: stylesheet.infoPage },
           _react2.default.createElement(
             'div',
-            { style: stylesheet.infoBody },
+            { style: this.getInfoBodyStyles() },
             this._getInfoContent(),
             this._getSourceCode(),
             this._getPropTables()
@@ -199,9 +128,11 @@ var Story = function (_React$Component) {
     value: function _renderOverlay() {
       var _this2 = this;
 
-      var linkStyle = (0, _extends3.default)({}, stylesheet.link.base, stylesheet.link.topRight);
+      var stylesheet = this.state.stylesheet;
 
-      var infoStyle = (0, _assign2.default)({}, stylesheet.info);
+      var linkStyle = _extends({}, stylesheet.link.base, stylesheet.link.topRight);
+
+      var infoStyle = Object.assign({}, stylesheet.info);
       if (!this.state.open) {
         infoStyle.display = 'none';
       }
@@ -242,7 +173,7 @@ var Story = function (_React$Component) {
             { style: stylesheet.infoPage },
             _react2.default.createElement(
               'div',
-              { style: stylesheet.infoBody },
+              { style: this.getInfoBodyStyles() },
               this._getInfoHeader(),
               this._getInfoContent(),
               this._getSourceCode(),
@@ -255,6 +186,8 @@ var Story = function (_React$Component) {
   }, {
     key: '_getInfoHeader',
     value: function _getInfoHeader() {
+      var stylesheet = this.state.stylesheet;
+
       if (!this.props.context || !this.props.showHeader) {
         return null;
       }
@@ -277,6 +210,8 @@ var Story = function (_React$Component) {
   }, {
     key: '_getInfoContent',
     value: function _getInfoContent() {
+      var stylesheet = this.state.stylesheet;
+
       if (!this.props.info) {
         return '';
       }
@@ -301,6 +236,8 @@ var Story = function (_React$Component) {
   }, {
     key: '_getSourceCode',
     value: function _getSourceCode() {
+      var stylesheet = this.state.stylesheet;
+
       if (!this.props.showSource) {
         return null;
       }
@@ -325,7 +262,7 @@ var Story = function (_React$Component) {
   }, {
     key: '_getPropTables',
     value: function _getPropTables() {
-      var types = new _map2.default();
+      var types = new Map();
 
       if (this.props.propTables === null) {
         return null;
@@ -364,10 +301,12 @@ var Story = function (_React$Component) {
       // extract components from children
       extract(this.props.children);
 
-      var array = (0, _from2.default)(types.keys());
+      var array = Array.from(types.keys());
       array.sort(function (a, b) {
         return (a.displayName || a.name) > (b.displayName || b.name);
       });
+
+      var stylesheet = this.state.stylesheet;
 
       var propTables = array.map(function (type, idx) {
         return _react2.default.createElement(
@@ -398,8 +337,6 @@ var Story = function (_React$Component) {
         ),
         propTables
       );
-
-      return;
     }
   }, {
     key: 'render',
@@ -411,9 +348,13 @@ var Story = function (_React$Component) {
       return this._renderOverlay();
     }
   }]);
+
   return Story;
 }(_react2.default.Component);
 
+Story.childContextTypes = {
+  storyStylesheet: _react2.default.PropTypes.object
+};
 exports.default = Story;
 
 
@@ -426,6 +367,7 @@ Story.propTypes = {
   showHeader: _react2.default.PropTypes.bool,
   showSource: _react2.default.PropTypes.bool,
   children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.object, _react2.default.PropTypes.array]),
+  stylesheet: _react2.default.PropTypes.object,
   mtrcConf: _react2.default.PropTypes.object
 };
 

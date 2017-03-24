@@ -4,33 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _assign = require('babel-runtime/core-js/object/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _merge3 = require('lodash/merge');
+
+var _merge4 = _interopRequireDefault(_merge3);
 
 var _Props = require('./Props');
 
@@ -38,45 +20,47 @@ var _Props2 = _interopRequireDefault(_Props);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var stylesheet = {
-  containerStyle: {},
-  tagStyle: {
-    color: '#777'
-  }
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Node = function (_React$Component) {
-  (0, _inherits3.default)(Node, _React$Component);
+  _inherits(Node, _React$Component);
 
   function Node(props) {
-    (0, _classCallCheck3.default)(this, Node);
-    return (0, _possibleConstructorReturn3.default)(this, (Node.__proto__ || (0, _getPrototypeOf2.default)(Node)).call(this, props));
+    _classCallCheck(this, Node);
+
+    return _possibleConstructorReturn(this, (Node.__proto__ || Object.getPrototypeOf(Node)).call(this, props));
   }
 
-  (0, _createClass3.default)(Node, [{
+  _createClass(Node, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var node = _props.node;
-      var depth = _props.depth;
-      var tagStyle = stylesheet.tagStyle;
-      var containerStyle = stylesheet.containerStyle;
+      var _props = this.props,
+          node = _props.node,
+          depth = _props.depth;
+      var storyStylesheet = this.context.storyStylesheet;
 
+      var _merge2 = (0, _merge4.default)({}, storyStylesheet.Node),
+          tagStyle = _merge2.tagStyle,
+          containerStyle = _merge2.containerStyle;
 
       var leftPad = {
         paddingLeft: 3 + (depth + 1) * 15,
         paddingRight: 3
       };
 
-      (0, _assign2.default)(containerStyle, leftPad);
+      Object.assign(containerStyle, leftPad);
 
-      var _getData = getData(node);
-
-      var name = _getData.name;
-      var text = _getData.text;
-      var children = _getData.children;
+      var _getData = getData(node),
+          name = _getData.name,
+          text = _getData.text,
+          children = _getData.children;
 
       // Just text
+
 
       if (!name) {
         return _react2.default.createElement(
@@ -111,7 +95,7 @@ var Node = function (_React$Component) {
       }
 
       // Keep a copy so that further mutations to containerStyle don't impact us:
-      var containerStyleCopy = (0, _assign2.default)({}, containerStyle);
+      var containerStyleCopy = Object.assign({}, containerStyle);
 
       // tag with children
       return _react2.default.createElement(
@@ -150,9 +134,13 @@ var Node = function (_React$Component) {
       );
     }
   }]);
+
   return Node;
 }(_react2.default.Component);
 
+Node.contextTypes = {
+  storyStylesheet: _react2.default.PropTypes.object
+};
 exports.default = Node;
 
 

@@ -5,50 +5,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.A = exports.UL = exports.LI = exports.P = undefined;
 
-var _extends2 = require('babel-runtime/helpers/extends');
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends3 = _interopRequireDefault(_extends2);
-
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
-
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = require('babel-runtime/helpers/createClass');
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
-
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-var _inherits2 = require('babel-runtime/helpers/inherits');
-
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _theme = require('../theme');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var P = exports.P = function (_React$Component) {
-  (0, _inherits3.default)(P, _React$Component);
+  _inherits(P, _React$Component);
 
   function P() {
-    (0, _classCallCheck3.default)(this, P);
-    return (0, _possibleConstructorReturn3.default)(this, (P.__proto__ || (0, _getPrototypeOf2.default)(P)).apply(this, arguments));
+    _classCallCheck(this, P);
+
+    return _possibleConstructorReturn(this, (P.__proto__ || Object.getPrototypeOf(P)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(P, [{
+  _createClass(P, [{
     key: 'render',
     value: function render() {
-      var style = (0, _extends3.default)({}, _theme.baseFonts, {
+      var style = _extends({}, this.context.storyStylesheet.baseFont, {
         fontSize: '15px'
       });
       return _react2.default.createElement(
@@ -58,21 +43,27 @@ var P = exports.P = function (_React$Component) {
       );
     }
   }]);
+
   return P;
 }(_react2.default.Component);
 
+P.contextTypes = {
+  storyStylesheet: _react2.default.PropTypes.object
+};
+
 var LI = exports.LI = function (_React$Component2) {
-  (0, _inherits3.default)(LI, _React$Component2);
+  _inherits(LI, _React$Component2);
 
   function LI() {
-    (0, _classCallCheck3.default)(this, LI);
-    return (0, _possibleConstructorReturn3.default)(this, (LI.__proto__ || (0, _getPrototypeOf2.default)(LI)).apply(this, arguments));
+    _classCallCheck(this, LI);
+
+    return _possibleConstructorReturn(this, (LI.__proto__ || Object.getPrototypeOf(LI)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(LI, [{
+  _createClass(LI, [{
     key: 'render',
     value: function render() {
-      var style = (0, _extends3.default)({}, _theme.baseFonts, {
+      var style = _extends({}, this.context.storyStylesheet.baseFont, {
         fontSize: '15px'
       });
       return _react2.default.createElement(
@@ -82,21 +73,27 @@ var LI = exports.LI = function (_React$Component2) {
       );
     }
   }]);
+
   return LI;
 }(_react2.default.Component);
 
+LI.contextTypes = {
+  storyStylesheet: _react2.default.PropTypes.object
+};
+
 var UL = exports.UL = function (_React$Component3) {
-  (0, _inherits3.default)(UL, _React$Component3);
+  _inherits(UL, _React$Component3);
 
   function UL() {
-    (0, _classCallCheck3.default)(this, UL);
-    return (0, _possibleConstructorReturn3.default)(this, (UL.__proto__ || (0, _getPrototypeOf2.default)(UL)).apply(this, arguments));
+    _classCallCheck(this, UL);
+
+    return _possibleConstructorReturn(this, (UL.__proto__ || Object.getPrototypeOf(UL)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(UL, [{
+  _createClass(UL, [{
     key: 'render',
     value: function render() {
-      var style = (0, _extends3.default)({}, _theme.baseFonts, {
+      var style = _extends({}, this.context.storyStylesheet.baseFont, {
         fontSize: '15px'
       });
 
@@ -107,18 +104,24 @@ var UL = exports.UL = function (_React$Component3) {
       );
     }
   }]);
+
   return UL;
 }(_react2.default.Component);
 
+UL.contextTypes = {
+  storyStylesheet: _react2.default.PropTypes.object
+};
+
 var A = exports.A = function (_React$Component4) {
-  (0, _inherits3.default)(A, _React$Component4);
+  _inherits(A, _React$Component4);
 
   function A() {
-    (0, _classCallCheck3.default)(this, A);
-    return (0, _possibleConstructorReturn3.default)(this, (A.__proto__ || (0, _getPrototypeOf2.default)(A)).apply(this, arguments));
+    _classCallCheck(this, A);
+
+    return _possibleConstructorReturn(this, (A.__proto__ || Object.getPrototypeOf(A)).apply(this, arguments));
   }
 
-  (0, _createClass3.default)(A, [{
+  _createClass(A, [{
     key: 'render',
     value: function render() {
       var style = {
@@ -132,5 +135,6 @@ var A = exports.A = function (_React$Component4) {
       );
     }
   }]);
+
   return A;
 }(_react2.default.Component);

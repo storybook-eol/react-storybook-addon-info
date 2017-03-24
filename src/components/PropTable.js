@@ -11,17 +11,16 @@ for (const typeName in React.PropTypes) {
   PropTypesMap.set(type.isRequired, typeName);
 }
 
-const stylesheet = {
-  propTable: {
-    marginLeft: -10,
-    borderSpacing: '10px 5px',
-    borderCollapse: 'separate',
-  },
-};
 
 export default class PropTable extends React.Component {
+
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const type = this.props.type;
+    const stylesheet = this.context.storyStylesheet.PropTable;
 
     if (!type) {
       return null;
@@ -66,7 +65,7 @@ export default class PropTable extends React.Component {
     });
 
     return (
-      <table style={stylesheet.propTable}>
+      <table style={stylesheet.table}>
         <thead>
           <tr>
             <th>property</th>

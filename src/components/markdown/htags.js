@@ -1,10 +1,13 @@
 import React from 'react';
-import { baseFonts } from '../theme';
 
 export class H1 extends React.Component {
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const styles = {
-      ...baseFonts,
+      ...this.context.storyStylesheet.baseFont,
       borderBottom: '1px solid #eee',
       fontWeight: 600,
       margin: 0,
@@ -17,9 +20,13 @@ export class H1 extends React.Component {
 }
 
 export class H2 extends React.Component {
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const styles = {
-      ...baseFonts,
+      ...this.context.storyStylesheet.baseFont,
       fontWeight: 600,
       margin: 0,
       padding: 0,
@@ -31,9 +38,13 @@ export class H2 extends React.Component {
 }
 
 export class H3 extends React.Component {
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const styles = {
-      ...baseFonts,
+      ...this.context.storyStylesheet.baseFont,
       fontWeight: 600,
       margin: 0,
       padding: 0,
@@ -46,9 +57,13 @@ export class H3 extends React.Component {
 }
 
 export class H4 extends React.Component {
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const styles = {
-      ...baseFonts,
+      ...this.context.storyStylesheet.baseFont,
       fontWeight: 600,
       margin: 0,
       padding: 0,
@@ -60,9 +75,13 @@ export class H4 extends React.Component {
 }
 
 export class H5 extends React.Component {
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const styles = {
-      ...baseFonts,
+      ...this.context.storyStylesheet.baseFont,
       fontWeight: 600,
       margin: 0,
       padding: 0,
@@ -74,9 +93,13 @@ export class H5 extends React.Component {
 }
 
 export class H6 extends React.Component {
+  static contextTypes = {
+    storyStylesheet: React.PropTypes.object
+  };
+
   render() {
     const styles = {
-      ...baseFonts,
+      ...this.context.storyStylesheet.baseFont,
       fontWeight: 400,
       margin: 0,
       padding: 0,
