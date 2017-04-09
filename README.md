@@ -54,7 +54,7 @@ storiesOf('Button')
 > Have a look at [this example](example/story.js) stories to learn more about the `addWithInfo` API.
 
 ## Use with Docgen
-We may add the description to prop. For example:
+To add a prop description, we can use a single line or multiple lines comment as below example:
 ```js
 Object.assign(Button, {
   displayName: 'Button',

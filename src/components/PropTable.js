@@ -119,11 +119,6 @@ export default class PropTable extends React.Component {
     const props = hasDocgen(type) ? propsFromDocgen(type) : propsFromPropTypes(type);
 
     if (isNotEmpty(props)) {
-      const array = Object.values(props);
-      array.sort(function (a, b) {
-        return a.property > b.property;
-      });
-
       return (
         <table style={stylesheet.propTable}>
           <thead>
@@ -136,7 +131,7 @@ export default class PropTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {array.map(row => (
+            {Object.values(props).sort((a, b) => a.property > b.property).map(row => (
               <tr key={row.property}>
                 <td>{row.property}</td>
                 <td>{row.propType}</td>
