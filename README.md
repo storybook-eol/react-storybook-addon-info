@@ -52,6 +52,25 @@ storiesOf('Button')
 
 > Have a look at [this example](example/story.js) stories to learn more about the `addWithInfo` API.
 
+## Use with Docgen
+To add a prop description, we can use a single line or multiple lines comment as below example:
+```js
+Object.assign(Button, {
+  displayName: 'Button',
+  propTypes: {
+    /** Single line comment: This is label description */
+    label: React.PropTypes.string.isRequired,
+    /*
+     * Multiple lines comment: This is style description
+     * Must be in object
+     */
+    style: React.PropTypes.object,
+    disabled: React.PropTypes.bool,
+    onClick: React.PropTypes.func,
+  },
+});
+```
+
 ## The FAQ
 
 **Components lose their names on static build**
