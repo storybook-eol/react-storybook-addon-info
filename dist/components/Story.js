@@ -86,7 +86,7 @@ var stylesheet = {
     }
   },
   info: {
-    position: 'absolute',
+    position: 'fixed',
     background: 'white',
     top: 0,
     bottom: 0,
