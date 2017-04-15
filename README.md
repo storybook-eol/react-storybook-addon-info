@@ -2,6 +2,12 @@
 
 A React Storybook addon to show additional information for your stories.
 
+--- 
+
+**This repo has been deprecated because it's now included in https://github.com/storybooks/storybook**
+
+---
+
 ![React Storybook Screenshot](docs/home-screenshot.png)
 
 ## Usage
